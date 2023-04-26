@@ -45,7 +45,6 @@ src/learningHA \
 src/modelParser \
 src/simulation \
 src/simulinkModelling \
-src/tester/UnitTesting_application \
 src/utilities \
 src/utilities/hyperbox \
 src/utilities/math \

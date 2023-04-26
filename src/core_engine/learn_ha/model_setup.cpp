@@ -5,7 +5,7 @@
  *      Author: amit
  */
 
-#include <core_engine/learn_ha/model_setup.h>
+#include "model_setup.h"
 
 model_setup::model_setup (std::string variable_category, std::string input_signal_type, std::string numberOf_control_points, std::string initial_set){
 

@@ -13,7 +13,6 @@ RM := rm -rf
 -include src/utilities/math/subdir.mk
 -include src/utilities/hyperbox/subdir.mk
 -include src/utilities/subdir.mk
--include src/tester/UnitTesting_application/subdir.mk
 -include src/simulinkModelling/subdir.mk
 -include src/simulation/subdir.mk
 -include src/modelParser/subdir.mk

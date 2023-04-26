@@ -57,8 +57,12 @@ To automatically install all the pre-requsites and compile the HybridLearner cod
 ./install.sh
 ```
 
-
+Note:
 -------------------------
+This project also contain a submodule (https://github.com/rajgurung777/learnHA), if you download the .zip file it may 
+not include the submoudule, so also manually download and extract learnHA inside the HybridLearner/src folder and 
+then execute the ./install.sh command. 
+
 
 # Unit Testing the source code
 Contributors should write unit-tests for their code contributions and keep them in the tester directory.
