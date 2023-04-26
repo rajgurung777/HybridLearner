@@ -1,0 +1,28 @@
+2 2 2
+Initial-mode 1
+mode 1
+inv:
+y>=0.0
+ODE: 
+x' = -y
+y' = x
+mode 2
+inv:
+y<=0.0
+ODE: 
+x' = -y
+y' = x
+Transition-ID 0
+Trans-Src-Dest 1 => 2
+guard:
+y < 0
+reset:
+x' = x
+y' = y
+Transition-ID 1
+Trans-Src-Dest 2 => 1
+guard:
+y > 0
+reset:
+x' = x
+y' = y
