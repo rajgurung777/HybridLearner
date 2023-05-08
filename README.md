@@ -23,9 +23,6 @@ For building HybridLearner from source, install the following third party librar
 - pytest
 - fastdtw
   - See https://pypi.org/project/fastdtw/ to install and learn to use the interface.
-- UnitTest++ (A unit testing package)
-  - To download see https://github.com/unittest-cpp/unittest-cpp
-
 
 
 
