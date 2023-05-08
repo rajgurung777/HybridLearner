@@ -64,27 +64,3 @@ not include the submoudule, so also manually download and extract learnHA inside
 then execute the ./install.sh command. 
 
 
-# Unit Testing the source code
-Contributors should write unit-tests for their code contributions and keep them in the tester directory.
-If test-cases as files are required, then these files should be kept under the test_cases directory.
-
-To automatically install all the pre-requsites and compile the test cases, execute the scrip file using the command 
-shown below (here we assume the libraries directory is created in the above process):
-```sh
-./install_tester.sh
-```
-***Building the test-cases:***
-
-To build the test-cases execute the command shown below:
-```sh
-cd test
-sudo make all
-```
-The test executable with the name HybridLearner-test will be created in the test directory.
-
-***Running the test-cases:***
-To run and verify the test-cases type the command: 
-```sh
-./HybridLearner-test
-```
-

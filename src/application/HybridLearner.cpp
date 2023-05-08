@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
 	user_inputs::ptr user_Inputs = user_inputs::ptr(new user_inputs());
 
 	try {
-		std::cout << std::endl;
-		std::cout << "**** Running tool HybridLearner ... ****"  << std::endl;
+//		std::cout << std::endl;
+//		std::cout << "**** Running tool HybridLearner ... ****"  << std::endl;
 
 		commandLineParser(argc, argv, user_Inputs);
 
@@ -39,7 +39,9 @@ int main(int argc, char *argv[]) {
 	engineSelector engSelect(user_Inputs);
 
 	engSelect.select();
-
+	double runTime = engSelect.getReport()->getRuntimeLearningAlgo();
+//	cout <<"Learning Time = " << runTime << endl;
+	cout << runTime << endl;
 
 	return 0;
 

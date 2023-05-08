@@ -185,6 +185,11 @@ std::list<struct timeseries_all_var> user_inputs_helper::generate_input_signals(
 		// Debug ----
 		//H->print_var_mapping();
 		//init_poly_usersInput->print_var_mapping();
+		/*cout <<"user inputs initial set . size() = " << user_Inputs->getInitialSet().size() << endl;
+		std::list<std::string> uinputs = user_Inputs->getInitialSet();
+		for (std::list<std::string>::iterator ui = uinputs.begin(); ui != uinputs.end(); ui++) {
+			cout <<"input =" << (*ui) << endl;
+		}*/
 		//  ----
 
 		string_list_to_polytope(user_Inputs->getInitialSet(), init_poly_usersInput); //Note: when the parsing model do not have ODE for the input variable, but variable mapping done from user's supplied information.

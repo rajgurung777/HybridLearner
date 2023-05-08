@@ -6,6 +6,10 @@
  */
 
 #include "simulinkModelConstructor.h"
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <sys/stat.h>
 
 
 void simulinkModelConstructor::printSimulinkModelFile() {
@@ -61,10 +65,21 @@ void simulinkModelConstructor::printSimulinkModelFile() {
 		std::string createCommand = "";
 		createCommand.append("mkdir ");
 		createCommand.append(outfile);
-		int x = system(createCommand.c_str());
-		if (x == -1) {
-			std::cout <<"Error executing cmd: " << createCommand << std::endl;
+		struct stat sb; int flag=0;
+		if (stat(outfile.c_str(), &sb) ==0 && S_ISDIR(sb.st_mode)){
+			flag=1;
+		} else {
+			int x = system(createCommand.c_str());
+			if (x == -1) {
+				std::cout <<"Error executing cmd: " << createCommand << std::endl;
+				exit(EXIT_FAILURE);
+			}
+//			else {
+//	            cout << "Folder created!" << endl;
+//	        }
+
 		}
+
 
 	} else {	//executed for engine="bbc"
 		outfile = intermediate->getOutputfilenameWithoutExtension();
@@ -1029,7 +1044,7 @@ int simulinkModelConstructor::executeSimulinkModelConstructor(std::unique_ptr<MA
 		string cmd1 = "addpath (genpath('";
 		cmd1.append(intermediate->getMatlabPathForLearnedModel());
 		cmd1.append("'))");
-		std::cout << cmd1 << endl;
+//		std::cout << cmd1 << endl;
 		//x = engEvalString(ep, cmd1.c_str());
 		ep->eval(convertUTF8StringToUTF16String(cmd1));
 	}
@@ -1039,7 +1054,7 @@ int simulinkModelConstructor::executeSimulinkModelConstructor(std::unique_ptr<MA
 	//cmd2="cd('../../../Release/";
 	//cmd2.append(folderName);
 	//cmd2.append("')");
-	cout<< "Learned model path=" << intermediate->getMatlabPathForLearnedModel() << endl;
+//	cout<< "Learned model path=" << intermediate->getMatlabPathForLearnedModel() << endl;
 	//engEvalString(ep, "cd('../src/benchmark/circle')");
 	cmd2="cd('";
 	cmd2.append(intermediate->getMatlabPathForLearnedModel());
@@ -1390,7 +1405,7 @@ void simulinkModelConstructor::create_runScript_for_simu_engine(std::string simu
 
 	modelfile.open(cmd);
 	if (modelfile.is_open()) {
-		std::cout << "\nRunning Script File " << cmd << " created!!\n";
+//		std::cout << "\nRunning Script File " << cmd << " created!!\n";
 		//std::cout << "\nFile " << model_file_with_path << " created (Simulink Model) ...\n";
 		modelfile << "%% ******** Simulate User Supplied Model ******** \n";
 		modelfile << "% Run the simulation and generate a txt file containing a result of the simulation. \n";
@@ -1588,7 +1603,7 @@ void simulinkModelConstructor::create_runScript_for_simu_engine(std::string simu
 	}
 
 	modelfile.close();
-	std::cout << "\n Script file created for running the User supplied Simulink Model ...\n";
+//	std::cout << "\n Script file created for running the User supplied Simulink Model ...\n";
 }
 
 void simulinkModelConstructor::create_runScript_for_learn_ha_loop_engine(std::string simulink_model_filename, std::string script_filename, std::string output_filename) {
@@ -1611,11 +1626,11 @@ void simulinkModelConstructor::create_runScript_for_learn_ha_loop_engine(std::st
 	cmd.append("/");
 	cmd.append(filename);
 
-	std::cout <<"File name:" << cmd << std::endl;
+//	std::cout <<"File name:" << cmd << std::endl;
 
 	modelfile.open(cmd);
 	if (modelfile.is_open()) {
-		std::cout << "\nRunning Script File " << cmd << " created!!\n";
+//		std::cout << "\nRunning Script File " << cmd << " created!!\n";
 		//std::cout << "\nFile " << model_file_with_path << " created (Simulink Model) ...\n";
 		modelfile << "%% ******** Simulate User Supplied Model ******** \n";
 		modelfile << "% Run the simulation and generate a txt file containing a result of the simulation. \n";
@@ -1820,7 +1835,7 @@ void simulinkModelConstructor::create_runScript_for_learn_ha_loop_engine(std::st
 	}
 
 	modelfile.close();
-	std::cout << "\n Script file created for running the User supplied Simulink Model ...\n";
+//	std::cout << "\n Script file created for running the User supplied Simulink Model ...\n";
 }
 
 void simulinkModelConstructor::addFilteringCode(ofstream &modelfile) {

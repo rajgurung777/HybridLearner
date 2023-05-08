@@ -127,7 +127,6 @@ void commandLineParser(int argc, char *argv[], user_inputs::ptr& userInputs) {
 	("degree,d", po::value<int>()->default_value(1), "Sets the Maximum degree of Polynomial ODE (default 1). A value of 1 learns a linear model, 2 or more for nonlinear model.")
 	("boundary-degree", po::value<int>()->default_value(1), "Sets the Maximum degree of Polynomial Guard (default 1). A value of 1 learns a linear model, 2 or more for nonlinear model.")
 
-	("extra", po::value<std::string>(), "Extra options for internal use in the tool debugging")
 	("max-generate-trace-size", po::value<int>()->default_value(20), "Extra option to set trace generation size (when > simu-init-size and max-traces, default=20). Debug version")
 	("seed", po::value<int>()->default_value(100), "Seed for generating random number series. Default is set to value 100.")
 	("simulation-check", po::value<int>()->default_value(1), "Simulation based Testing for Safety violation enabled or disabled. 0 to disable and 1 to enable. Default is enabled.")
@@ -520,10 +519,6 @@ void commandLineParser(int argc, char *argv[], user_inputs::ptr& userInputs) {
 		userInputs->setMaxStoptimeEquitest(tmp);
 	}
 
-
-	if (vm.count("extra")) {
-		userInputs->setExtra(vm["extra"].as<std::string>());
-	}
 
 	if (vm.count("goal")) {
 		userInputs->setGoalProperty(vm["goal"].as<std::string>());

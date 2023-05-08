@@ -82,6 +82,8 @@ public:
 
 
 	virtual ~engineSelector();
+	const summary::ptr& getReport() const;
+	void setReport(const summary::ptr &report);
 };
 
 

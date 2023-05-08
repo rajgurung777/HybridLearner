@@ -34,7 +34,7 @@ private:
 	double DTW_simu_time;		//used in the DTW Clustering algorithm for internal simulation for similarity check
 	unsigned int DTW_sample_size;		//used in the DTW Clustering algorithm for internal simulation for similarity check
 	//std::string simu_init_point;	//string containing the simulation points to start the simulations
-	std::string extra;	//This is an extra input from the command line for internal use mainly for debugging
+
 	std::string controller_filename;
 	std::string config_filename;	//output file for future use
 	unsigned int sys_dimension; //dimension of the system under test (SUT)
@@ -352,8 +352,7 @@ public:
 	void setSimulationCheck(unsigned int simulationCheck);
 	unsigned int getSysDimension() const;
 	void setSysDimension(unsigned int sysDimension);
-	const std::string& getExtra() const;
-	void setExtra(const std::string &extra);
+
 
 	//*******************************************
 	const std::string& getSimuInitPoint() const;	//to be removed after verifying code in engine=HybridLearner

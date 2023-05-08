@@ -106,7 +106,7 @@ model_setup::model_setup(hybridAutomata::ptr ha, user_inputs::ptr userInputs){
 		string orig_varName = (*input_it);
 		string new_varName = "x";
 		new_varName.append(to_string(index));
-		cout << "VarName=" << varData.var_name << " type:" <<varData.var_type << " numberOf_cp:" << varData.numberOf_cp << endl;
+//		cout << "VarName=" << varData.var_name << " type:" <<varData.var_type << " numberOf_cp:" << varData.numberOf_cp << endl;
 		new_input_signal_type.append(new_varName);		//syntax of input string="x0=fixed-step & x1=fixed-linear"
 		new_input_signal_type.append("=");
 		new_input_signal_type.append(varData.var_type);

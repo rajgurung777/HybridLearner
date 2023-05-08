@@ -22,7 +22,7 @@ void learnHA_caller(user_inputs::ptr user_Inputs){
 
 	std::string cmd_str="";
 
-	std::cout<<"\n***** Now running Python to execute HA Learning Algorithm ******"<<std::endl;
+//	std::cout<<"\n***** Now running Python to execute HA Learning Algorithm ******"<<std::endl;
 
 	cmd_str = "cd ../src/learnHA && python3 run.py ";	//For OS Ubuntu 20.04 LTS I have modified the command to python3 instead of python
 	//std::cout<<("Check the output!!")<<std::endl;
@@ -104,7 +104,7 @@ void learnHA_caller(user_inputs::ptr user_Inputs){
 	cmd_str.append(" --is-invariant ");
 	cmd_str.append(std::to_string(user_Inputs->getInvariant())); // a integer number: 0 and 1 for computing Invariant or 2 for ignoring computation
 
-	std::cout << "Command: "<<cmd_str << std::endl;
+//	std::cout << "Command: "<<cmd_str << std::endl;
 
 	int x1 = system(cmd_str.c_str());
 	//system("pwd"); //although supplied cd ../src/pwa but still in the current Release location

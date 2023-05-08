@@ -90,7 +90,7 @@ void engineSelector::selectMdl2Slx(){
 
 void engineSelector::selectLearn_HA() {
 	//This function is called from the engine "learn-ha"
-	std::cout << "Running Engine: Learning Hybrid Automaton  ... \n";
+//	std::cout << "Running Engine: Learning Hybrid Automaton  ... \n";
 
 	parameters::ptr params = parameters::ptr(new parameters());
 	params->setParameters(userInputs, H, intermediate);
@@ -114,11 +114,11 @@ void engineSelector::selectLearn_HA() {
 
 	double running_time = wall_clock / (double) 1000;	//convert milliseconds to seconds
 	//std::cout << "\n\n*******Learning Nonlinear Switched Dynamical Systems (specific Hybrid Automata)****\n \t Running Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
-	std::cout << "\nRunning Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
+//	std::cout << "\nRunning Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
 
 	report->setRuntimeLearningAlgo(running_time);
 
-	std::cout << "\nModel Learning Phase completed ........"<<std::endl;
+//	std::cout << "\nModel Learning Phase completed ........"<<std::endl;
 
 	// ********* Now copy/move the learned model file from "/src/pwa" to current folder *********
 	string copycommand ="";
@@ -192,6 +192,7 @@ void engineSelector::select() {
 	// Select the engine learn-ha-loop: learns an HA in a loop using a simulink model (and input specifications) as input
 	if(boost::algorithm::iequals(userInputs->getEngine(),"learn-ha-loop")==true) {
 		selectLearn_HA_loop();
+//		report->printSummary();
 
 		return;
 	}
@@ -208,4 +209,12 @@ void engineSelector::select() {
 
 engineSelector::~engineSelector() {
 	// Destructor stub
+}
+
+const summary::ptr& engineSelector::getReport() const {
+	return report;
+}
+
+void engineSelector::setReport(const summary::ptr &report) {
+	this->report = report;
 }

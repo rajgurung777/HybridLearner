@@ -10,6 +10,7 @@
 
 /*
  * Learns an Automaton HA, given a simulink model M, by simulating M and learning M' in a refinement loop based on equivalence testing of M' and M.
+ *
  */
 void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::unique_ptr<MATLABEngine> &ep){
 
@@ -18,7 +19,7 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 	hybridAutomata::ptr H = params->getH();
 
 //	cout <<"Value is " << userInputs->getFixedIntervalData() << endl;
-	std::cout << "Running Engine: Learning Hybrid Automaton in a Loop ... \n";
+//	std::cout << "Running Engine: Learning Hybrid Automaton in a Loop ... \n";
 	/*
 	 * Step 1: Take input a Simulink Model M, which is the system to Learn: user may input absolute or relative and/or partial path
 	 * Step 2: Generate simulation traces based on user's inputs. User will provide variable name present in the original model M and not in M'
@@ -60,6 +61,7 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 		if (tot_count != 0) { //skip on the initial iteration
 			updateTraceFile(tot_count, CE_output_var, CE_input_var, params);	//adds new time-serise data to the initial trace-file
 		}
+
 		call_LearnHA(params, report);
 
 		boost::timer::cpu_timer modelParsing;
@@ -72,7 +74,7 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 
 		//verifyHA_output(H);
 		/*
-		 * TODO: need to take care of the variable names. Here original model and learned model have different names.
+		 * Need to take care of the variable names. Here original model and learned model have different names.
 		 * For eg, learned model have names as x0, x1 and so on. Where as original user-supplied model may have names as "u, x , v" where u:input and x:output, v:output.
 		 * Note: since the inputs to the learning algorithm has the format {[time,input,output]}, so the variables are in the order input-variables followed by output-variables
 		 * 		 We also know the size of input and output variables from user's input (along with the original model).
@@ -80,7 +82,7 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 		 * 		 or original variables depending on the need.
 		 */
 
-		cout <<"before calling setup_for_learned_model(): Value is " << userInputs->getFixedIntervalData() << endl;
+//		cout <<"before calling setup_for_learned_model(): Value is " << userInputs->getFixedIntervalData() << endl;
 		//Now create a simulink model (txtslx) for equivalence testing. But run the model_setup_for_learned_model before construction.
 		// This setup should modify ha and user class to contain details with variable names.
 		la_setup->setup_for_learned_model(H, userInputs);	//This should modify the objects with new variables names
@@ -90,8 +92,11 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 
 		struct CE_list CEs;
 
-		flag = equivalenceTesting_for_learn_ha_loop(tot_count, la_setup, list_inputs, list_outputs, CE_output_var, CE_input_var, params, ep); //these list_inputs and list_outputs are generated using original_model's variable-names
-
+		int for_paper = 1;
+		if (for_paper == 0)
+			flag = equivalenceTesting_for_learn_ha_loop(tot_count, la_setup, list_inputs, list_outputs, CE_output_var, CE_input_var, params, ep); //these list_inputs and list_outputs are generated using original_model's variable-names
+		else
+			flag = true;	//We do not want to perform equivalence check for this paper we present only a Passive learning.
 
 		if (flag == true) { //could not find a CE, so equivalent. Therefore NO improvement in learning required.
 			break;
@@ -109,7 +114,7 @@ void execute_learn_ha_loop(parameters::ptr params, summary::ptr &report, std::un
 
 	} //End of Loop
 
-	report->printSummary();
+//	report->printSummary();
 
 }
 
@@ -224,7 +229,7 @@ void generate_initial_traces_for_learn_ha_loop(std::list<struct timeseries_all_v
 	std::list<struct timeseries_all_var> initial_simu_inputValues_timeSeriesData;
 
 	generate_input_information(initial_inputValues_timeSeriesData, initial_output_values, params, ep, report);	//initial values: This function has the random-generation SEED
-	//std::cout <<"10 this is done" <<std::endl;
+//	std::cout <<"10 this is done" <<std::endl;
 	// Note: inputs are generated for max(initial-simu-size, max-traces). But for initial traces only use initial-simu-size
 	std::list<std::vector<double> >::iterator it_out = initial_output_values.begin();
 	std::list<struct timeseries_all_var>::iterator it_in = initial_inputValues_timeSeriesData.begin();
@@ -236,7 +241,6 @@ void generate_initial_traces_for_learn_ha_loop(std::list<struct timeseries_all_v
 	}
 	generate_simulation_traces_original_model_to_learn(initial_simu_inputValues_timeSeriesData, initial_simu_output_values, params, ep, report);
 	//generate_simulation_traces_original_model_to_learn(initial_inputValues_timeSeriesData, initial_output_values);
-
 	std::list<std::vector<double> > initial_output_for_equivalence;
 	std::list<struct timeseries_all_var> initial_input_timeseries_for_equivalence;
 	it_in = initial_inputValues_timeSeriesData.begin();
@@ -398,11 +402,11 @@ void call_LearnHA(parameters::ptr params, summary::ptr &report) {
 
 	double running_time = wall_clock / (double) 1000;	//convert milliseconds to seconds
 	//std::cout << "\n\n*******Learning Nonlinear Switched Dynamical Systems (specific Hybrid Automata)****\n \t Running Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
-	std::cout << "\nRunning Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
+//	std::cout << "\nRunning Time (Boost/Wall clock time) (in Seconds) = " << running_time<<std::endl;
 
 	report->setRuntimeLearningAlgo(running_time);
 
-	std::cout << "\nModel Learning Phase completed ........"<<std::endl;
+//	std::cout << "\nModel Learning Phase completed ........"<<std::endl;
 
 	// ********* Now copy/move the learned model file from "/src/pwa" to current folder *********
 	string copycommand ="";
@@ -443,7 +447,7 @@ void constructModel(unsigned int count, parameters::ptr params, std::unique_ptr<
 	simulinkModelConstructor::ptr model = simulinkModelConstructor::ptr(new simulinkModelConstructor(H, userInputs, intermediate));
 	model->setIteration(count);
 	model->printSimulinkModelFile();
-	cout << "Done Creating the script file for creating Simulink Model!!!" << endl;
+//	cout << "Done Creating the script file for creating Simulink Model!!!" << endl;
 
 	// ---------- few Path setting for execution to create the .slx model
 	std::string  learned_path ="";
@@ -453,9 +457,9 @@ void constructModel(unsigned int count, parameters::ptr params, std::unique_ptr<
 	learned_path.append(intermediate->getOutputfilenameWithoutExtension());
 	intermediate->setMatlabPathForLearnedModel(learned_path);
 
-	std::cout <<"Creating Simulink model file with extension .slx .... please wait..." << std::endl;
+//	std::cout <<"Creating Simulink model file with extension .slx .... please wait..." << std::endl;
 	model->executeSimulinkModelConstructor(ep);
-	std::cout << "Model .slx file created successfully!!" << std::endl;
+//	std::cout << "Model .slx file created successfully!!" << std::endl;
 
 	//running script file generated for learned model with just the input variable name
 	// ----------------------run script generator-----------------------------
@@ -640,6 +644,8 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 	deleteCommand.append(simuFileName);
 	deleteCommand.append(" ");
 	deleteCommand.append(tmpSimuFile);
+
+//	cout << "del command: "<< deleteCommand << endl;
 	int x = system(deleteCommand.c_str());	//Deleting simu_modelFile.txt and tmp_simu_modelFile.txt. Todo: check if exists before delete
 	if (x == -1) {
 		std::cout <<"Error executing cmd: " << deleteCommand <<std::endl;
@@ -689,7 +695,7 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 	std::list<std::vector<double> >::iterator it_out_val = initial_output_values.begin(); //iterator for the output variables
 	for (std::list<struct timeseries_all_var>::iterator it =initial_simulation_timeSeriesData.begin(); it != initial_simulation_timeSeriesData.end(); it++, it_out_val++) {
 
-		cout <<"counting = " << counting <<endl;
+//		cout <<"counting = " << counting <<endl;
 		std::list<struct timeseries_input> init_point = (*it).timeseries_signal;
 
 		std::vector<double> output_variable_init_values = (*it_out_val);
@@ -791,7 +797,7 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 	double wall_clock;
 	wall_clock = matlab_simulation.elapsed().wall / 1000000; //convert nanoseconds to milliseconds
 	double running_time = wall_clock / (double) 1000;	//convert milliseconds to seconds
-	std::cout << "Matlab Simulation and Trace File generation: Running Time (in Seconds) = " << running_time << std::endl;
+//	std::cout << "Matlab Simulation and Trace File generation: Running Time (in Seconds) = " << running_time << std::endl;
 	report->setRuntimeMatlabInitialSimulation(running_time);
 
 //

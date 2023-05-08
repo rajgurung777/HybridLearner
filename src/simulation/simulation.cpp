@@ -583,7 +583,7 @@ std::list< std::vector<double> > getInternalPoints(polytope::ptr &poly, unsigned
  * Outputs: is a purely random control-points for each variable for generating input-signals for each simulations
  * By using a seed
  */
-std::list<std::list<struct control_points>> getInternalControlPoints(polytope::ptr &poly, unsigned int nos_simulations,
+std::list<std::list<struct control_points> > getInternalControlPoints(polytope::ptr &poly, unsigned int nos_simulations,
 		list<struct control_points> list_var_cps, myRandomNumberGenerator::ptr &randomGenObj) {
 	std::list<std::list<struct control_points>> res_data;
 	std::list< std::vector<double> > res;
@@ -596,6 +596,7 @@ std::list<std::list<struct control_points>> getInternalControlPoints(polytope::p
 	cols = A.size2();
 	dim = cols;
 
+//	cout <<"rows =" <<rows << "   and cols =" << cols << endl;
 	assert(rows == 2 * cols);	//For hyperbox number of constraints should be bounded (lower and upper)
 
 	//For each dimension of the hyperbox generating a list of bounded values, which can be used as points

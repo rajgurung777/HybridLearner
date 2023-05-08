@@ -184,9 +184,6 @@ void user_inputs::setPlotVars(const struct plot_variables &plotVars) {
 	plot_vars = plotVars;
 }
 
-const std::string& user_inputs::getExtra() const {
-	return extra;
-}
 
 int user_inputs::getModel() const {
 	return model;
@@ -307,9 +304,7 @@ void user_inputs::setModel(int model) {
 	this->model = model;
 }
 
-void user_inputs::setExtra(const std::string &extra) {
-	this->extra = extra;
-}
+
 
 unsigned int user_inputs::getNumberMatlabSimulationExecutedEquivalenceTest() const {
 	return number_matlab_simulation_executed_EquivalenceTest;
