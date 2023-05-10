@@ -714,17 +714,14 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 		resultFileName.append("/");	//We assume the file "result_simu_data.txt" is generated after each simulation
 		resultFileName.append(output_filename);	//We assume the file "result_simu_data.txt" is generated after each simulation
 
-//		int a;
-//		cout << "press/enter any number: " <<endl;
-//		cin >> a;
-
 
 
 /*
 
+
 		// **************** Code to  generating simulation-trace file for comparison with tool POSEHAD and also to generate traces used for Testing ***********
 		// Temporary Code for generating simulation-trace file for comparison with tool POSEHAD
-		string copy_cmd="cp ", benchmarkName="outputData/twoTanks_";  //benchmarkName="outputData/bball_"; // benchmarkName="outputData/excitableCells_";
+		string copy_cmd="cp ", benchmarkName="outputData/bball_";  //benchmarkName="outputData/bball_"; // benchmarkName="outputData/excitableCells_";
 		benchmarkName.append(std::to_string(counting));
 		benchmarkName.append(".csv");
 		copy_cmd.append(resultFileName);
@@ -736,6 +733,7 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 
 		// ***********************************
 */
+
 
 
 
@@ -801,10 +799,12 @@ void generate_simulation_traces_original_model_to_learn(std::list<struct timeser
 	report->setRuntimeMatlabInitialSimulation(running_time);
 
 //
-
 /*
+
+
   	std::cout<<"engineSelector::generate_simulation_traces_original_model_to_learn: Terminating the tool after generating Trace File!" <<endl;
 	exit(1);
+
 */
 
 
