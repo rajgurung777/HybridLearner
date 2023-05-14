@@ -1,18 +1,18 @@
-# HybridLearner: Learn Hybrid Systems for Cyber Physical Systems.
-HybridLearner: is a research tool for learning complex Cyber Physical Systems. 
-Our algorithm leverages automaton learning to approximate black-box hybrid systems, streamlining the modeling 
-and testing process. Analyze learned models along with additional features such as Simulink model simulation, model 
-transformation from simple text to .SLX format, and checking equivalence of Simulink model files.
+# HybridLearner: Learn Hybrid Systems for Cyber-Physical Systems.
+HybridLearner: is a research tool for learning complex Cyber-Physical Systems. 
+Our algorithm leverages automaton learning to approximate black-box hybrid systems, streamlining the modeling and testing process. 
+Analyze learned models along with additional features such as Simulink model simulation and model transformation from simple text to .SLX format, and checking equivalence of Simulink model files.
 
-Installation
-------------
+## Installation
+
 HybridLearner is implemented in C++ using MATLAB/Simulink and Python. 
+We have used MATLAB version R2021a.  
 We suppose HybridLearner works on many UNIX-like operating systems. 
-We have tested HybridLearner on Ubuntu 18.04, and **Ubuntu 20.04**. 
-However, for Ubuntu 18.04 it requires installing **python 3.8** or above since **Ubuntu 18.04** comes with **python 2.7** by default.
+We have tested HybridLearner on Ubuntu 18.04 and **Ubuntu 20.04**. 
+However, Ubuntu 18.04 requires installing **python 3.8** or above since **Ubuntu 18.04** comes with **python 2.7** by default.
 
 ### Requirements for building HybridLearner from source
-For building HybridLearner from source, install the following third party libraries:
+For building HybridLearner from source, install the following third-party libraries:
 - Boost C++ Libraries
   - The latest package can be downloaded from https://www.boost.org/
 - nlohmann-json3-dev - JSON for Modern C++
@@ -47,17 +47,24 @@ The tool executable with the name HybridLearner will be created in the build dir
 ./HybridLearner --help
 ```
 ***********
-Alternative Installation
--------------------------
+
+## Alternative Installation
 To automatically install all the pre-requsites and compile the HybridLearner code, execute the scrip file using the command:
 ```sh
 ./install.sh
 ```
 
-Note:
--------------------------
-This project also contain a submodule (https://github.com/rajgurung777/learnHA), if you download the .zip file it may 
-not include the submoudule, so also manually download and extract learnHA inside the HybridLearner/src folder and 
-then execute the ./install.sh command. 
+## Instructions:
+
+    Note: Modify the MATLAB library and include paths to match your local installation before running the install.sh script. 
+          This ensures that the project can locate the necessary MATLAB libraries and headers during the installation process.
+
+    Note: Submodule (https://github.com/rajgurung777/learnHA) is required.
+          This project includes a submodule located at https://github.com/rajgurung777/learnHA. 
+          If you download the project as a .zip file, the submodule might not be included. 
+          To ensure the submodule is present, please follow these steps:
+          - Manually download the learnHA submodule from the provided URL.
+          - Extract the contents of the learnHA submodule into the HybridLearner/src folder of this project.
+          - After completing the submodule setup, execute the ./install.sh command to finalize the installation process.
 
 

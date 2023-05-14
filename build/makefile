@@ -70,7 +70,7 @@ all: HybridLearner
 HybridLearner: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -Wl,--no-undefined "/usr/local/MATLAB/R2021a/sys/os/glnxa64/orig/libstdc++.so.6"   -Wl,--as-needed -Wl,-rpath-link,/usr/local/MATLAB/R2021a/extern/bin/glnxa64 -Wl,-rpath-link,/usr/local/MATLAB/R2021a/bin/glnxa64 -L/usr/local/MATLAB/R2021a/extern/bin/glnxa64 -L/usr/local/lib -L/usr/local/MATLAB/R2021a/bin/glnxa64 -L/usr/local/MATLAB/R2021a/extern/lib/glnxa64 -pthread -o "HybridLearner" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -Wl,--no-undefined $(MATLAB_STDCPP_PATH)   -Wl,--as-needed -L/usr/local/lib -L$(MATLAB_LIBRARY_PATH_1) -L$(MATLAB_LIBRARY_PATH_2) -L$(MATLAB_LIBRARY_PATH_3) -Wl,-rpath-link,$(MATLAB_LIBRARY_PATH_1) -Wl,-rpath-link,$(MATLAB_LIBRARY_PATH_2) -pthread -o "HybridLearner" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

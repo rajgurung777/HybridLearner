@@ -51,10 +51,16 @@ cd ../..
 sudo apt install csh
 
 
-#set library path env variable to include boost. Please change the ***Matlab path as per your installation setup***.
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:/usr/local/MATLAB/R2021a/bin/glnxa64:/usr/local/MATLAB/R2021a/extern/bin/glnxa64:/usr/local/MATLAB/R2021a/extern/lib/glnxa64:/usr/local/MATLAB/R2021a/sys/os/glnxa64
-
-export PATH=$PATH:/usr/lib/x86_64-linux-gnu/glib-2.0/:/usr/bin:/usr/local/MATLAB/R2021a/bin
+# Set library path using environment variable to include boost and MATLAB libraries.
+# Please change the ***Matlab path as per your installation setup, in my case it is under /usr/local/MATLAB/R2021aUpdate8 ***.
+# I recommend to add this to your .bashrc file as well
+export MATLAB_INCLUDE_PATH=/usr/local/MATLAB/R2021aUpdate8/extern/include
+export MATLAB_LIBRARY_PATH_1=/usr/local/MATLAB/R2021aUpdate8/extern/bin/glnxa64
+export MATLAB_LIBRARY_PATH_2=/usr/local/MATLAB/R2021aUpdate8/bin/glnxa64
+export MATLAB_LIBRARY_PATH_3=/usr/local/MATLAB/R2021aUpdate8/extern/lib/glnxa64
+export MATLAB_STDCPP_PATH=/usr/local/MATLAB/R2021aUpdate8/sys/os/glnxa64/orig/libstdc++.so.6
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/local/MATLAB/R2021aUpdate8/bin/glnxa64:/usr/local/MATLAB/R2021aUpdate8/bin/glnxa64/builtins/sl_main/:/usr/local/MATLAB/R2021aUpdate8/extern/bin/glnxa64:/usr/local/MATLAB/R2021aUpdate8/extern/lib/glnxa64:/usr/local/MATLAB/R2021aUpdate8/sys/os/glnxa64
+export PATH=$PATH:/usr/lib/x86_64-linux-gnu/glib-2.0/:/usr/bin:/usr/local/MATLAB/R2021aUpdate8/bin
 
 # Compiling the tool HybridLearner
 echo "building HybridLearner ..."

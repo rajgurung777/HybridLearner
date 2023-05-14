@@ -6,7 +6,7 @@
 #  matlab &
 # (2) Then in the Command Window of MATLAB just started, type the command
 #  matlab.engine.shareEngine
-
+# This will save the time for starting MATLAB and Simulink for every experiment.
 
 
 # Execute the shell script for learning the benchmark models
