@@ -67,4 +67,12 @@ To automatically install all the pre-requsites and compile the HybridLearner cod
           - Extract the contents of the learnHA submodule into the HybridLearner/src folder of this project.
           - After completing the submodule setup, execute the ./install.sh command to finalize the installation process.
 
+## Run Examples
+Some examples are included in HybridLearner/examples, and a shell script to run these examples is present inside the build folder. To run, do the following:
+```sh
+cd build
+./run_main_HybridLearner.sh
+```
 
+
+##### The complete artifact of "Learning nonlinear hybrid automata from input-output time-series data" is at https://doi.org/10.5281/zenodo.7934743.
